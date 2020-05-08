@@ -1,0 +1,3 @@
+CREATE ROLE myuser ENCRYPTED PASSWORD 'mypass' login;
+
+CREATE DATABASE mydb OWNER myuser;

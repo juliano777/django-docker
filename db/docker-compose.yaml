@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+
+  db:
+    image: juliano777/postgres
+    container_name: mydb
+    volumes:
+    - ./sql/01-db.sql:/var/local/pgsql/docker-entrypoint-initdb.d/01-db.sql
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypass
+      POSTGRES_DB: mydb
+    ports:
+      - "5433:5432"
+    #command: runscripts
+    networks:
+      - mydjango
+
+networks:
+  mydjango:

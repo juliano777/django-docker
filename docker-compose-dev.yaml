@@ -18,8 +18,6 @@ services:
     container_name: mydb
     # volumes:
     # - ${HOME}/django-docker/data/db:/var/local/pgsql/data
-    # command: sleep 15 && psql -c "CREATE ROLE myuser ENCRYPTED PASSWORD 'mypass' login;"
-    command: 'psql -l'
     environment:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypass
