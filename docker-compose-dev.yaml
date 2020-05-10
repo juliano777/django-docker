@@ -2,9 +2,8 @@ version: "3.7"
 
 services:
   django-docker:
+    container_name: django
     image: django-docker
-    networks:
-      - "mydjango"
     volumes:
       - ${HOME}/django-docker/myproject/:/app/myproject/
     ports:
@@ -12,12 +11,14 @@ services:
     command: bash -c "python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
     depends_on:
       - db
+    networks:
+      - net_django
 
   db:
     image: juliano777/postgres
     container_name: mydb
-    # volumes:
-    # - ${HOME}/django-docker/data/db:/var/local/pgsql/data
+    volumes:
+      - ./db/sql:/var/local/pgsql/scripts
     environment:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypass
@@ -25,7 +26,8 @@ services:
     ports:
       - "5433:5432"
     networks:
-      - mydjango
+      - net_django
 
 networks:
-  mydjango:
+  net_django:
+    name: net_django
