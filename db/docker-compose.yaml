@@ -6,14 +6,14 @@ services:
     image: juliano777/postgres
     container_name: mydb
     volumes:
-    - ./sql/01-db.sql:/var/local/pgsql/docker-entrypoint-initdb.d/01-db.sql
+    - ./sql:/var/local/pgsql/scripts
     environment:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypass
       POSTGRES_DB: mydb
     ports:
       - "5433:5432"
-    #command: runscripts
+    #command: 'pg_ctl start && runscripts.sh'
     networks:
       - mydjango
 
